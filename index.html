@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClipForge: edit one video, export hundreds</title>
+  <meta name="description" content="ClipForge is a desktop video editor built around batch recipes. Edit one clip, save the edit as a recipe, and apply it to 10 to 1000 videos: crop to 9:16, add music from an audio group, watermark, clean metadata, rename.">
+  <script src="assets/theme.js"></script>
+  <link rel="icon" href="assets/icons/clipforge-icon-48.png" sizes="48x48">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/clipforge-icon-256.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0E0E10">
+  <link rel="canonical" href="https://clipforgekh.github.io/clipforge-web/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ClipForge">
+  <meta property="og:title" content="ClipForge: edit one video, export hundreds">
+  <meta property="og:description" content="A desktop video editor built around batch recipes. Edit once, apply to hundreds of clips, export through a queue that pauses and resumes.">
+  <meta property="og:url" content="https://clipforgekh.github.io/clipforge-web/">
+  <meta property="og:image" content="https://clipforgekh.github.io/clipforge-web/assets/icons/clipforge-icon-512.png">
+  <link rel="preload" href="assets/fonts/ibm-plex-sans-condensed-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="./"><img src="assets/logo.svg" alt="" width="26" height="26"><span>Clip<b>Forge</b></span></a>
+      <nav class="nav" aria-label="Site">
+        <a class="wide" href="#how">How it works</a>
+        <a class="wide" href="#recipes">Recipes</a>
+        <a href="download/">Download</a>
+      </nav>
+      <button class="btn btn-icon theme-toggle" type="button" aria-label="Switch between light and dark theme">
+        <svg class="icon moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="icon sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-head">
+          <div>
+            <h1>Edit one video. Export two hundred.</h1>
+            <p class="lede">ClipForge is a desktop video editor for people who post the same kind of clip again and again. Get one video right, save the edit as a recipe, and apply it to a whole folder. Every output is cropped, scored, watermarked, cleaned and renamed.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="download/">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+                Download ClipForge
+              </a>
+              <a class="btn btn-quiet" href="#how">See how a batch works</a>
+            </div>
+          </div>
+          <p class="platforms"><strong>Windows, macOS and Linux</strong>Runs on your computer. Your videos never leave it.</p>
+        </div>
+
+        <figure class="panel batch" aria-labelledby="batch-caption">
+          <div class="panel-bar">
+            <span class="panel-title">Batch run</span>
+            <span class="chip"><span class="swatch" aria-hidden="true"></span>Recipe: Facebook Reel</span>
+            <span class="chip">1080 × 1920</span>
+          </div>
+          <div class="batch-body">
+            <div class="batch-source">
+              <div class="source-frame" aria-hidden="true"></div>
+              <div>
+                <p style="color:var(--fg);font-weight:600">One edited clip</p>
+                <ul class="source-steps">
+                  <li><i style="background:var(--t-video)"></i>Crop 9:16, fill</li>
+                  <li><i style="background:var(--t-audio)"></i>Music: Relax, random</li>
+                  <li><i style="background:var(--t-sticker)"></i>Watermark</li>
+                  <li><i style="background:var(--t-effect)"></i>Clean metadata</li>
+                </ul>
+              </div>
+            </div>
+            <div class="sheet-wrap">
+              <div class="sheet" data-batch-sheet aria-hidden="true"></div>
+              <figcaption class="sheet-foot" id="batch-caption">
+                <span aria-live="off"><span class="count" data-batch-count>0</span> of 200 exported, <span class="mono" data-batch-file>video_000.mp4</span>. <span data-batch-status></span></span>
+                <span class="legend" aria-label="Colours show which Relax track each video got">
+                  <span><i style="background:var(--t-video)"></i>relax-01</span>
+                  <span><i style="background:var(--t-audio)"></i>relax-02</span>
+                  <span><i style="background:var(--t-text)"></i>relax-03</span>
+                  <span><i style="background:var(--t-effect)"></i>relax-04</span>
+                  <span><i style="background:var(--t-sticker)"></i>relax-05</span>
+                </span>
+              </figcaption>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head">
+          <h2>Four steps, once. Then it runs without you.</h2>
+          <p>The editor comes first: a preview and a timeline, like the editors you already know. The batch is one more step at the end, not a separate tool.</p>
+        </div>
+        <div class="timeline">
+          <div class="ruler" aria-hidden="true"><span>00:00</span><span>00:05</span><span>00:10</span><span>00:15</span></div>
+          <ol class="track" style="list-style:none;margin-top:12px;padding:0">
+            <li class="clip" style="--c:var(--t-video)">
+              <h3>Import</h3>
+              <p>Drop in files or a whole folder of downloaded clips.</p>
+              <ul><li>Files and folders</li><li>Drag and drop</li></ul>
+            </li>
+            <li class="clip" style="--c:var(--t-text)">
+              <h3>Edit one</h3>
+              <p>Crop, trim, add text, a logo and sound until one clip looks right.</p>
+              <ul><li>9:16, 1:1, 4:5, 16:9</li><li>Blurred background fill</li></ul>
+            </li>
+            <li class="clip" style="--c:var(--t-sticker)">
+              <h3>Save as recipe</h3>
+              <p>The edit becomes a recipe you can name, reuse and share as a file.</p>
+              <ul><li>One click to reapply</li><li>Output names and format</li></ul>
+            </li>
+            <li class="clip" style="--c:var(--t-audio)">
+              <h3>Run the batch</h3>
+              <p>Apply the recipe to 10 or 1000 videos and let the queue work.</p>
+              <ul><li>Pause, resume, retry</li><li>Notified when it's done</li></ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="recipes">
+      <div class="container split">
+        <div class="section-head">
+          <h2>A recipe is your edit, written down.</h2>
+          <p>Every change you make is stored as an instruction, not baked into pixels. That's why one edit can be replayed on a different video, and why your source files are never touched.</p>
+          <ul class="points">
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Fits each clip.</strong> Crop and framing adapt to each source's size and length.</span></li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Shareable.</strong> Hand a teammate the recipe file and they get the same output.</span></li>
+            <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Made for social.</strong> Start from presets for Reels, Shorts and TikTok.</span></li>
+          </ul>
+        </div>
+        <section class="panel inspector" aria-label="Example recipe: Facebook Reel">
+          <div class="panel-bar"><span class="panel-title">Facebook Reel</span><span class="mono">Recipe</span></div>
+          <div class="group" style="--c:var(--t-video)">
+            <h3><i></i>Video</h3>
+            <dl>
+              <div class="row"><dt>Ratio</dt><dd>9:16</dd></div>
+              <div class="row"><dt>Resolution</dt><dd>1080 × 1920</dd></div>
+              <div class="row"><dt>Crop</dt><dd>Center, fill</dd></div>
+              <div class="row"><dt>Watermark</dt><dd class="mono">MyBrand.png</dd></div>
+            </dl>
+          </div>
+          <div class="group" style="--c:var(--t-audio)">
+            <h3><i></i>Audio</h3>
+            <dl>
+              <div class="row"><dt>Original sound</dt><dd>70%</dd></div>
+              <div class="row"><dt>Background music</dt><dd>Relax, random</dd></div>
+              <div class="row"><dt>Music volume</dt><dd>18%</dd></div>
+              <div class="row"><dt>Fade in, fade out</dt><dd>1.5 s, 2 s</dd></div>
+            </dl>
+          </div>
+          <div class="group" style="--c:var(--t-effect)">
+            <h3><i></i>Metadata</h3>
+            <dl>
+              <div class="row"><dt>Remove metadata and GPS</dt><dd><span class="toggle" role="img" aria-label="On"></span></dd></div>
+              <div class="row"><dt>Verify every output</dt><dd><span class="toggle" role="img" aria-label="On"></span></dd></div>
+            </dl>
+          </div>
+          <div class="group" style="--c:var(--t-sticker)">
+            <h3><i></i>Output</h3>
+            <dl>
+              <div class="row"><dt>File names</dt><dd class="mono">video_001.mp4, …</dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="sound">
+      <div class="container split">
+        <section class="panel" aria-label="A sound library with seven audio groups">
+          <div class="panel-bar"><span class="panel-title">Sound library</span></div>
+          <ul class="library">
+            <li class="folder picked"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Relax<span class="wave" aria-hidden="true"><b style="height:40%"></b><b style="height:80%"></b><b style="height:55%"></b><b style="height:100%"></b><b style="height:65%"></b><b style="height:35%"></b><b style="height:70%"></b></span><span class="files">24 tracks</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Funny<span class="files">12 tracks</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Action<span class="files">18 tracks</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Intro<span class="files">6 tracks</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Outro<span class="files">6 tracks</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Sound Effects<span class="files">40 files</span></li>
+            <li class="folder"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>Voice Over<span class="files">9 files</span></li>
+          </ul>
+        </section>
+        <div class="section-head">
+          <h2>Two hundred videos, not one song two hundred times.</h2>
+          <p>A recipe points at a folder of music, not a single file. Each folder is an audio group, and ClipForge picks a track for every video. The music is looped or trimmed to fit, faded, and lowered while someone speaks.</p>
+          <div class="modes">
+            <div><strong>Random</strong>A different track for each video.</div>
+            <div><strong>Sequential</strong>Track 1, 2, 3, then back to 1.</div>
+            <div><strong>Same for all</strong>One track for the whole batch.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="metadata">
+      <div class="container split">
+        <div class="section-head">
+          <h2>Clean files, checked one by one.</h2>
+          <p>Downloaded videos carry titles, authors, comments and sometimes the GPS position where they were filmed. ClipForge removes them on export, on by default, and keeps only the fields you choose. Then it opens every output and checks.</p>
+        </div>
+        <section class="panel" aria-label="Metadata of one file before and after export">
+          <div class="panel-bar"><span class="panel-title">Metadata</span><span class="mono" style="color:var(--muted);margin-left:auto">IMG_4471.MOV</span></div>
+          <div class="meta-compare">
+            <div>
+              <h3>Before</h3>
+              <dl>
+                <div class="row gone"><dt>Title</dt><dd>Sunset at the pier</dd></div>
+                <div class="row gone"><dt>Author</dt><dd>j.doe</dd></div>
+                <div class="row gone"><dt>Comment</dt><dd>shot on phone</dd></div>
+                <div class="row gone"><dt>Location</dt><dd>+11.5564+104.9282</dd></div>
+                <div class="row gone"><dt>Name</dt><dd>IMG_4471.MOV</dd></div>
+              </dl>
+            </div>
+            <div>
+              <h3>After</h3>
+              <dl>
+                <div class="row kept"><dt>Title</dt><dd>empty</dd></div>
+                <div class="row kept"><dt>Author</dt><dd>empty</dd></div>
+                <div class="row kept"><dt>Comment</dt><dd>empty</dd></div>
+                <div class="row kept"><dt>Location</dt><dd>removed</dd></div>
+                <div class="row kept"><dt>Name</dt><dd>video_014.mp4</dd></div>
+              </dl>
+            </div>
+          </div>
+          <p class="verified"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Output checked with FFprobe after export.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="queue">
+      <div class="container">
+        <div class="section-head">
+          <h2>Built for runs that take all night.</h2>
+          <p>A batch of hundreds can take hours. You should be able to walk away, close the lid, and come back to finished work.</p>
+        </div>
+        <div class="facts">
+          <div>
+            <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>Pause and resume</h3>
+            <p>Stop the queue when you need the computer back. It picks up at the file it stopped on.</p>
+          </div>
+          <div>
+            <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>Survives a crash</h3>
+            <p>Your project saves after every change. If the app or the computer goes down, finished files stay finished.</p>
+          </div>
+          <div>
+            <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>Uses your graphics card</h3>
+            <p>Hardware encoding with NVIDIA, Intel, AMD and Apple chips, so long batches finish sooner.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container closing">
+        <h2>Bring a folder. Leave with a batch.</h2>
+        <a class="btn btn-primary" href="download/">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+          Download ClipForge
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>ClipForge. A desktop video editor for batches.</span>
+      <nav aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href="download/">Download</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="assets/batch.js"></script>
+</body>
+</html>

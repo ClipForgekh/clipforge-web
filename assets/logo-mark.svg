@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 10 40 44">
+  <title>ClipForge</title>
+  <defs>
+    <linearGradient id="cf-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3DE6EF"/>
+      <stop offset="1" stop-color="#0098C8"/>
+    </linearGradient>
+    <path id="cf-t" d="M22.5 14 L22.5 50 L51.5 32 Z" stroke="url(#cf-g)" stroke-width="3" stroke-linejoin="round"/>
+    <clipPath id="cf-b1"><rect x="0" y="0" width="64" height="25.4"/></clipPath>
+    <clipPath id="cf-b2"><rect x="0" y="28.4" width="64" height="7.2"/></clipPath>
+    <clipPath id="cf-b3"><rect x="0" y="38.6" width="64" height="30"/></clipPath>
+  </defs>
+  <g fill="url(#cf-g)">
+    <g clip-path="url(#cf-b1)"><use href="#cf-t"/></g>
+    <g clip-path="url(#cf-b2)"><use href="#cf-t"/></g>
+    <g clip-path="url(#cf-b3)"><use href="#cf-t"/></g>
+  </g>
+</svg>
