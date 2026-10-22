@@ -1,3 +1,52 @@
+# Normalized baseline — keep the shared sections in sync across all repos.
+
+# ── Dependencies ──
 node_modules/
-_site/
+
+# ── Build output ──
+dist/
+build/
+target/
+*.tsbuildinfo
+
+# ── Env & secrets ──
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── Logs & local data ──
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ── OS junk ──
 .DS_Store
+._*
+__MACOSX/
+Thumbs.db
+
+# ── Editors ──
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# ── Test & coverage artifacts ──
+coverage/
+.vitest-attachments/
+
+
+# ── Site output ──
+_site/
