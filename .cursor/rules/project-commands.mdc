@@ -1,0 +1,51 @@
+---
+description: TidyMac Windows project commands and workflow guide. Always active in this project.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+# TidyMac Windows — Agent Workflow Guide
+
+You are working on **TidyMac Windows** — a native Windows PC cleaner (Tauri + Rust core + Vue 3 + Bun).
+
+## Mandatory reading
+Always read `AGENTS.md` before making any change. It defines safety boundaries, architecture rules, and engineering method.
+
+## Commands (type these to trigger the workflow)
+
+| Trigger | What happens |
+|---------|-------------|
+| `@next` or "what's next" | Read `docs/windows/NEXT-STEPS.md`, find top Phase 7 TODO, output action plan |
+| `@discover` or "find features" | Scan parity gaps, unregistered specs, Windows-specific ideas, UX backlog, & competitor patterns → discovery report |
+| `@spec <TM-WIN-ID>` | Research spec, find similar existing tool, produce plan — no code yet |
+| `@implement <feature>` | Full TDD workflow: register → failing test → implement → wire → validate → update docs |
+| `@validate` | Run `cargo test --workspace && bun run test`, report results |
+| `@safety-check` | Audit open files/diff for Windows safety invariants |
+| `@review` | Structured review: blocking safety, spec compliance, test coverage, code quality |
+
+## Quick facts
+- **Toolchain:** `x86_64-pc-windows-gnu` (MinGW at `F:\Project\Programs\msys64\`)
+- **All 6 phases complete** — next work is Phase 7 (`docs/windows/NEXT-STEPS.md`)
+- **Priority 1:** AI Clutter scanner (TM-WIN-AICLUTTER-01)
+- **Priority 2:** Cloud Cleanup / OneDrive (TM-WIN-CLOUD-01)
+- **Validation:** `.\scripts\validate-windows.ps1` or `cargo test --workspace`
+
+## Hard rules (never violate)
+- No `fs::remove_file` / `DeleteFileW` directly — always use `mover_windows.rs`
+- No hardcoded localized folder names — always `SHGetKnownFolderPath(FOLDERID_*)`
+- No telemetry, background processes, or network calls
+- Nothing pre-ticked in scan result UI
+- Platform gates: `#[cfg(target_os = "windows")]` / `#[cfg(target_os = "macos")]`
+- Unavailable features → explicit `ComingSoon` or error — never silent no-op
+
+## Key file map
+
+| File | Purpose |
+|------|---------|
+| `AGENTS.md` | Engineering rules — read first |
+| `docs/windows/NEXT-STEPS.md` | What to build next |
+| `docs/windows/TM-WINDOWS-01.md` | Implementation map (one row per feature) |
+| `docs/windows/DEVELOPMENT-PHASES.md` | Phase history and gates |
+| `docs/windows/port-status.md` | Release gate checklist |
+| `crates/core/src/scan/catalog.rs` | Tool availability per platform |
+| `../tidymac-docs/features/TM-WIN-*/spec.md` | Normative specs |

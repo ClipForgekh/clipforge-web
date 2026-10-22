@@ -1,0 +1,13 @@
+---
+description: TidyMac Windows product, platform-safety, MCP and documentation rules
+alwaysApply: true
+---
+
+Follow the root `AGENTS.md`; it is the single source of truth. Before changing Windows behavior, read the relevant contract under `../tidymac-docs/features/` and the implementation companion under `docs/windows/`.
+
+- Keep proposals distinct from code and test evidence. Never claim an MCP call or test passed unless you observed its result.
+- Use synthetic fixture trees for mutation tests; never clean a real user profile.
+- Preserve explicit review, scan-bound identities, Recycle Bin recovery and no arbitrary shell/PowerShell rules.
+- Do not silently block websites/ads, inspect browser profiles, move system/app/profile data, install drivers, capture screens, or change activation/licensing.
+- Use official Windows/browser handoffs and plain-language uncertainty. Broad permissions or old files/drivers are not proof of harm.
+- Include privacy, failure, cancellation, recovery, performance and measurable acceptance criteria in new feature specs.

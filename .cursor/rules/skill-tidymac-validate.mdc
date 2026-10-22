@@ -1,0 +1,47 @@
+﻿---
+description: Agent skill: tidymac-validate
+alwaysApply: false
+---
+
+---
+name: tidymac-validate
+description: Test, diagnose, fix and re-validate TidyMac through connected MCP tools or direct local checks. Use after changes to core, shell, MCP, UI, or when asked to verify/debug. Check MCP availability first, mutate only synthetic fixtures, and never claim unrun tests or clean real files.
+---
+
+# TidyMac validate loop (TM-MCP-01)
+
+Spec: `../tidymac-docs/features/TM-MCP-01/spec.md`; Windows gates: `docs/windows/TM-WINDOWS-01.md`. Server: `crates/mcp` (`tidymac-mcp`), registered in `.mcp.json`. Build/reconnect only when the workspace's Windows toolchain and core support it.
+
+## Safety (enforced by the server, never work around it)
+
+- The real home is scanned **read-only** (`tidymac_scan` with `home: "real"`). Plan and clean of a real-home scan are refused; nothing enables them.
+- Plan, clean, verify and history work only on sandbox fixtures from `tidymac_fixture_create`; moves go to the fixture's own `Trash/`.
+- Do not clean real files by any other route either (no `make dev` clicks, no scripts against `$HOME`).
+- For Windows, real cleanup is disabled until the handle-identity and Recycle Bin gates pass. Check that MCP tools are actually listed before describing a tool call as run; if not, continue with bounded local inspection and say MCP runtime validation is unavailable.
+- If the MSYS2 MinGW-w64 gcc (`gcc.exe` from `<msys64>\mingw64\bin`) or the Windows SDK is missing, do not install/alter system setup without approval and do not claim that a Windows build passed. Report the exact blocker; run only checks that don't require it. The Tauri lib test binary cannot start on the GNU toolchain, so workspace test runs exclude `-p tidymac`.
+
+## The loop
+
+Note the time you start (`since`), then repeat the test-first fix-and-check cycle until every applicable gate passes:
+
+1. Before changing behavior, add/update a focused regression or acceptance test. Run it first and confirm it fails for the intended reason (red).
+2. Implement the smallest production change that makes the test pass (green), then refactor without changing behavior. A test that was added only after implementation is not TDD evidence.
+3. Run `tidymac_run_checks {suite: "all"}`. Each failing step lists `failures[]` with `kind` (test, compile, lint, format, type, command), `name`, `file`, `line`, `message`, `output`.
+4. Fix each failure using the same test-first loop. While iterating, run the narrow suite: `{suite: "core", filter: "templates::"}`, `{suite: "ui", filter: "flows"}`.
+5. Run `tidymac_selftest`: junk_home fixture â†’ scan Cleanup â†’ plan default â†’ clean â†’ verify. On failure read `failed_step`, the step's `detail` and `log_lines`; the fixture is kept, so `tidymac_verify_fixture` / `tidymac_history` / `tidymac_scan_items` can dig in.
+6. Smoke: `tidymac_scan {flow: {kind: "module", id: "cleanup"}, home: "real"}` (read-only). `needs_access` categories mean the host process lacks Full Disk Access; that is a finding to report, not a bug to fix.
+7. `tidymac_logs_errors {since}`: warnings and errors grouped by event with the latest `hint`. Follow the hint; `tidymac_logs {event, scan_id|plan_id|run_id|fixture_id}` shows the lines.
+8. Back to 3 until everything passes. Then `make check` once and record commands and results in `build/*-ledger.md`.
+
+Follow the repository architecture rules in root `AGENTS.md`. Keep the modular monolith and use ports/adapters only at actual I/O or platform boundaries; do not introduce DDD, CQRS, saga, or service frameworks without a concrete, tested need. Documentation-only changes do not need artificial tests.
+
+For SQLite changes, use temporary databases and test migration/atomicity behavior; never test against the user's database. For MCP/Tauri/CLI contract changes, validate the exposed schema, bounds, result shape, errors/refusals, availability and docs against the actual handler and focused tests. For performance claims, capture a representative baseline and repeat the same workload after the change; otherwise report that performance was not measured.
+
+## Rule changes
+
+When a rule or the planner changes, check it on fixtures: `tidymac_fixture_create {template: "smart_care_home"}` (or `edge_cases`), scan `module:smart_care`, `tidymac_plan {ticked: "default"}`, `tidymac_clean`, `tidymac_verify_fixture`. `unexpected_moved` means something was offered that must stay; `unexpectedly_kept` means a default tick went missing. If the template's expectation itself must change, edit `crates/core/src/fixtures/templates.rs` and say why in its `why` text.
+
+## Reporting
+
+Report the actual tool results (pass/fail, counts, the failures you fixed), what you skipped, and anything only checkable by hand. Never claim green without a passing `run_checks all` and `selftest` in this session.
+
